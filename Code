@@ -1,0 +1,35 @@
+// Clock Freq = 300000000 ( set by config bit settings )
+
+long i = 0;
+
+
+// Store unsigned 8 bit Converted to C Audio Array
+// Assign 8 Port Pins 
+// Loop to output Audio Array through Port Pins
+
+
+int main(void){
+                          // Set Outputs
+    TRISEbits.TRISE0 = 0; 
+    TRISEbits.TRISE1 = 0;
+    TRISEbits.TRISE2 = 0; 
+    TRISEbits.TRISE3 = 0;
+    TRISEbits.TRISE4 = 0; 
+    TRISEbits.TRISE5 = 0;
+    TRISEbits.TRISE6 = 0; 
+    TRISEbits.TRISE7 = 0;
+    
+    while (1){
+        
+        //Register outputs array bytes 
+        LATE = *(unsigned char *)(&(Porkchop_raw[i++])); 
+        
+        if(i >= sizeof(Porkchop_raw)){
+            i = 0; // PIC32 uses sizeof() also
+        }
+        
+        // Outputs go to R2R Ladder, which feeds into a N Channel Mosfet Darlington Amp going to a speaker
+        
+        
+    }
+} 
